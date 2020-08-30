@@ -66,3 +66,64 @@ body {
   font-size: 25px;
   padding-bottom: 8px;
 }
+
+.popup-container {
+  background-color: rgba(0,0,0,0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.popup {
+  border-radius: 5px;
+  background-color: #2980b0;
+  position: absolute;
+  padding: 40px;
+  text-align: center;
+}
+
+.popup h2 {
+  margin-top: 0;
+}
+
+.popup-container button {
+  padding: 10px;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0,0,0,0.3);
+  font-size: 110%;
+  cursor: pointer;
+}
+
+.popup-container button:focus {
+  outline: none;
+}
+
+.popup-container button:active {
+  transform: scale(0.98);
+}
+
+.notification-container {
+  position: absolute;
+  background-color: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 10px 10px 0 0;
+  transition: transform 0.3s ease;
+  bottom: -100px;
+}
+
+.notification-container p {
+  margin: 0;
+}
+
+.notification-container.show {
+  transform: translateY(-100px)
+}
