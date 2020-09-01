@@ -11,17 +11,47 @@ const words = ['programming', 'application', 'interface', 'wizard'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetters = ['r', 'p'];
+const correctLetters = ['w', 'i', 'z', 'a', 'r', 'd'];
 const wrongLetters = [];
+
+// function displayWord() {
+//   wordEl.innerHTML = `
+//     ${selectedWord
+//       .split('')
+//       .map(letter => `<span class="letter">
+//         ${correctLetters.includes(letter) ? letter : ''}
+//       </span>`).join('')}
+//   `
+// };
+
+// displayWord();
+
 
 function displayWord() {
   wordEl.innerHTML = `
     ${selectedWord
       .split('')
-      .map(letter => `<span class="letter">
-        ${correctLetters.includes(letter) ? letter : ''}
-      </span>`).join('')}
-  `
+      .map(
+        letter => `
+        <span class='letter'>
+          ${correctLetters.includes(letter) ? letter : ''}
+        </span>
+        `
+      )
+      .join('')}
+  `;
+
+  // Remove new line!
+  const innerWord = wordEl.innerText.replace(/\n/g, '');
+  console.log(wordEl.innerText, innerWord);
+
+  // Popup message
+  if (innerWord === selectedWord) {
+    finalMessage.innerText = 'Congratulations! You won!';
+    popup.style.display = 'flex';
+  }
+
 };
 
 displayWord();
+
