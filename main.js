@@ -11,7 +11,7 @@ const words = ['programming', 'application', 'interface', 'wizard'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetters = ['w', 'i', 'z', 'a', 'r', 'd'];
+const correctLetters = [];
 const wrongLetters = [];
 
 // function displayWord() {
@@ -26,7 +26,7 @@ const wrongLetters = [];
 
 // displayWord();
 
-
+// Display Word
 function displayWord() {
   wordEl.innerHTML = `
     ${selectedWord
@@ -53,5 +53,47 @@ function displayWord() {
 
 };
 
-displayWord();
+// Show notification
+function showNotification() {
+  // console.log('show notification')
+  notification.classList.add('show');
 
+  setTimeout(() => {
+    notification.classList.remove('show');
+
+  }, 2000);
+}
+
+// Update wrong letters
+function updateWrongLettersEl() {
+  console.log('update wrong letters')
+}
+
+// Event listener for pressing a letter
+window.addEventListener('keydown', e => {
+  if (e.keyCode >= 65 && e.keyCode <= 90) {
+    const letter = e.key;
+
+    if (selectedWord.includes(letter)) {
+      if (!correctLetters.includes(letter)) {
+        correctLetters.push(letter);
+
+        displayWord()
+      } else {
+        showNotification()
+      }
+
+    } else {
+      if (!wrongLetters.includes(letter)) {
+        wrongLetters.push(letter);
+
+        updateWrongLettersEl()
+      } else {
+        showNotification()
+      }
+    }
+
+  }
+})
+
+displayWord();
