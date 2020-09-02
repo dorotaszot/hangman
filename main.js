@@ -7,12 +7,12 @@ const finalMessage = document.getElementById('final-message');
 
 const figureParts = document.querySelectorAll('.figure-part')
 
-const words = ['programming', 'application', 'interface', 'wizard'];
+const words = ['programming', 'application', 'interface', 'wizard', 'developer', 'function'];
 
 let selectedWord = words[Math.floor(Math.random() * words.length)];
 
-const correctLetters = [];
-const wrongLetters = [];
+let correctLetters = [];
+let wrongLetters = [];
 
 // function displayWord() {
 //   wordEl.innerHTML = `
@@ -53,7 +53,7 @@ function displayWord() {
 
 };
 
-// Show notification
+// Show notification 
 function showNotification() {
   // console.log('show notification')
   notification.classList.add('show');
@@ -66,8 +66,41 @@ function showNotification() {
 
 // Update wrong letters
 function updateWrongLettersEl() {
-  console.log('update wrong letters')
+  // console.log('update wrong letters')
+  // Display wrong letters
+  wrongLettersEl.innerHTML = `
+    ${wrongLetters.length > 0 ? '<p>Wrong</p>' : ''}
+    ${wrongLetters.map(letter => `<span>${letter}</span>`)}
+  `;
+
+  // Display parts
+  figureParts.forEach((part, index) => {
+    const errors = wrongLetters.length;
+
+    if (index < errors) {
+      part.style.display = 'block';
+    } else {
+      part.style.display = 'none';
+    }
+
+    // Display popup if lost
+    if (errors === figureParts.length) {
+      popup.style.display = 'flex';
+      finalMessage.innerText = 'Unfortunatelly, you lost'
+    }
+  });
+
+  // const errors = wrongLetters.length;
+
+  // if (figureParts.length < errors) {
+  //   figureParts.forEach((part) => {
+  //     part.style.display = 'block';
+  //   })
+  // }
+
 }
+
+
 
 // Event listener for pressing a letter
 window.addEventListener('keydown', e => {
@@ -95,5 +128,18 @@ window.addEventListener('keydown', e => {
 
   }
 })
+
+// Event litener for play again button
+playAgainBtn.addEventListener('click', () => {
+  // Clear arrays with letters
+  correctLetters = [];
+  wrongLetters = [];
+
+  selectedWord = words[Math.floor(Math.random() * words.length)];
+
+  displayWord();
+  updateWrongLettersEl()
+  popup.style.display = 'none';
+});
 
 displayWord();
